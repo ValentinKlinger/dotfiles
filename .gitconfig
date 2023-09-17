@@ -1,0 +1,13 @@
+[user]
+	name = valentin
+	email = valentink.fr@gmail.com
+[alias]
+	st = status
+	br = branch
+	l = log --pretty=oneline --abbrev-commit --graph --decorate
+	lg = log --pretty=oneline --abbrev-commit --graph --decorate --all
+	co = checkout
+[core]
+	editor = vim
+[pull]
+	rebase = False
