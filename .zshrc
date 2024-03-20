@@ -77,7 +77,32 @@ export VIRTUALENVWRAPPER_PYTHON=$(which python3)
 export WORKON_HOME="$HOME/Venvs" 
 source virtualenvwrapper.sh
 source $ZSH/oh-my-zsh.sh
+export PATH="$PATH:/opt/nvim-linux64/bin"
 alias jn="jupyter notebook"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[[ -r $NVM_DIR/bash_completion ]] && \. $NVM_DIR/bash_completion
+
+
+# nvim switcher
+# https://gist.github.com/elijahmanor/b279553c0132bfad7eae23e34ceb593b
+# https://www.youtube.com/watch?v=LkHjJlSgKZY&t=1s&ab_channel=ElijahManor
+# https://neovim.io/doc/user/starting.html#%24NVIM_APPNAME
+
+alias nvim-astro="NVIM_APPNAME=AstroNvim nvim"
+alias nvchad="NVIM_APPNAME=nvchad nvim"
+
+function nvims() {
+  items=("default" "AstroNvim" "nvchad")
+  config=$(printf "%s\n" "${items[@]}" | fzf --prompt "neovim config: " --height=50% --layout=reverse --border --exit-0)
+  if [[ -z $config ]]; then
+    echo "Nothing selected"
+    return
+  elif [[ $config == "default" ]]; then
+    config=""
+  fi
+  NVIM_APPNAME=$config nvim $@
+}
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
@@ -121,3 +146,9 @@ export CONDA_AUTO_ACTIVATE_BASE=false
 unset __conda_setup
 # <<< conda initialize <<<
 
+# opam configuration
+[[ ! -r /home/valentin/.opam/opam-init/init.zsh ]] || source /home/valentin/.opam/opam-init/init.zsh  > /dev/null 2> /dev/null
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
